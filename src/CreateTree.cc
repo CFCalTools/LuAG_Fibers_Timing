@@ -169,6 +169,7 @@ void CreateTree::Clear()
   {
     opPhoton_n = 0;
     opPhoton_process.clear();
+    opPhoton_parentTrackID.clear();
     opPhoton_energy.clear();
     opPhoton_waveLength.clear();
     opPhoton_time.clear();

@@ -101,7 +101,7 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
         else                                      CreateTree::Instance()->opPhoton_process.push_back( -1 );
         
         CreateTree::Instance()->opPhoton_n++;
-        CreateTree::Instance()->opPhoton_parentTrackID.push_back( theTrack->GetParentID() );
+        CreateTree::Instance()->opPhoton_parentTrackID.push_back( float(theTrack->GetParentID()) );
         CreateTree::Instance()->opPhoton_energy.push_back( theTrack->GetTotalEnergy()/eV );
         CreateTree::Instance()->opPhoton_waveLength.push_back( MyMaterials::fromEvToNm(theTrack->GetTotalEnergy()/eV) );
         CreateTree::Instance()->opPhoton_time.push_back( thePrePoint->GetGlobalTime()/picosecond );
@@ -129,7 +129,7 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
             else                                      CreateTree::Instance()->opAbsPhoton_process.push_back( -1 );
           }
           
-          CreateTree::Instance()->opAbsPhoton_parentTrackID.push_back( theTrack->GetParentID() );          
+          CreateTree::Instance()->opAbsPhoton_parentTrackID.push_back( float(theTrack->GetParentID()) );          
           CreateTree::Instance()->opAbsPhoton_energy.push_back( theTrack->GetTotalEnergy()/eV );
           CreateTree::Instance()->opAbsPhoton_waveLength.push_back( MyMaterials::fromEvToNm(theTrack->GetTotalEnergy()/eV) );
           CreateTree::Instance()->opAbsPhoton_time.push_back( theTrack->GetGlobalTime()/picosecond );
@@ -159,7 +159,7 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
           }
           
           CreateTree::Instance()->opPhoton_n_gap++;
-          CreateTree::Instance()->opPhoton_parentTrackID_gap.push_back( theTrack->GetParentID() );
+          CreateTree::Instance()->opPhoton_parentTrackID_gap.push_back( float(theTrack->GetParentID()) );
           CreateTree::Instance()->opPhoton_energy_gap.push_back( theTrack->GetTotalEnergy()/eV );
           CreateTree::Instance()->opPhoton_waveLength_gap.push_back( MyMaterials::fromEvToNm(theTrack->GetTotalEnergy()/eV) );
           CreateTree::Instance()->opPhoton_time_gap.push_back( theTrack->GetGlobalTime()/picosecond );
@@ -181,7 +181,7 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
           }
           
           CreateTree::Instance()->opPhoton_n_win++;
-          CreateTree::Instance()->opPhoton_parentTrackID_win.push_back( theTrack->GetParentID() );
+          CreateTree::Instance()->opPhoton_parentTrackID_win.push_back( float(theTrack->GetParentID()) );
           CreateTree::Instance()->opPhoton_energy_win.push_back( theTrack->GetTotalEnergy()/eV );
           CreateTree::Instance()->opPhoton_waveLength_win.push_back( MyMaterials::fromEvToNm(theTrack->GetTotalEnergy()/eV) );
           CreateTree::Instance()->opPhoton_time_win.push_back( theTrack->GetGlobalTime()/picosecond );
@@ -203,7 +203,7 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
           }
           
           CreateTree::Instance()->opPhoton_n_det++;
-          CreateTree::Instance()->opPhoton_parentTrackID_det.push_back( theTrack->GetParentID() );
+          CreateTree::Instance()->opPhoton_parentTrackID_det.push_back( float(theTrack->GetParentID()) );
           CreateTree::Instance()->opPhoton_energy_det.push_back( theTrack->GetTotalEnergy()/eV );
           CreateTree::Instance()->opPhoton_waveLength_det.push_back( MyMaterials::fromEvToNm(theTrack->GetTotalEnergy()/eV) );
           CreateTree::Instance()->opPhoton_time_det.push_back( theTrack->GetGlobalTime()/picosecond );
