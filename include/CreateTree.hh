@@ -49,6 +49,7 @@ class CreateTree
   int opPhoton_n;
   std::vector<float> opPhoton_energy;
   std::vector<int>   opPhoton_process; // production process (1 for Cerenkov, 2 for Scintillation, -1 for unknown)
+  std::vector<int>   opPhoton_parentTrackID;
   std::vector<float> opPhoton_waveLength;
   std::vector<float> opPhoton_time;
   std::vector<float> opPhoton_vertexX;
@@ -58,6 +59,7 @@ class CreateTree
   int opAbsPhoton_n;
   std::vector<float> opAbsPhoton_energy;
   std::vector<int>   opAbsPhoton_process; // production process (1 for Cerenkov, 2 for Scintillation, -1 for unknown)
+  std::vector<int>   opAbsPhoton_parentTrackID;
   std::vector<float> opAbsPhoton_waveLength;
   std::vector<float> opAbsPhoton_time;
   std::vector<float> opAbsPhoton_trackLength;
@@ -65,6 +67,7 @@ class CreateTree
   int opPhoton_n_gap;
   std::vector<int> opPhoton_side_gap;    // +1 if front detector, -1 if rear detector
   std::vector<int> opPhoton_process_gap; // production process (1 for Cerenkov, 2 for Scintillation, -1 for unknown)
+  std::vector<int> opPhoton_parentTrackID_gap;
   std::vector<float> opPhoton_energy_gap;
   std::vector<float> opPhoton_waveLength_gap;
   std::vector<float> opPhoton_time_gap;
@@ -73,6 +76,7 @@ class CreateTree
   int opPhoton_n_win;
   std::vector<int> opPhoton_side_win;    // +1 if front detector, -1 if rear detector
   std::vector<int> opPhoton_process_win; // production process (1 for Cerenkov, 2 for Scintillation, -1 for unknown)
+  std::vector<int> opPhoton_parentTrackID_win;
   std::vector<float> opPhoton_energy_win;
   std::vector<float> opPhoton_waveLength_win;
   std::vector<float> opPhoton_time_win;
@@ -81,6 +85,7 @@ class CreateTree
   int opPhoton_n_det;
   std::vector<int> opPhoton_side_det;    // +1 if front detector, -1 if rear detector
   std::vector<int> opPhoton_process_det; // production process (1 for Cerenkov, 2 for Scintillation, -1 for unknown)
+  std::vector<int> opPhoton_parentTrackID_det;
   std::vector<float> opPhoton_energy_det;
   std::vector<float> opPhoton_waveLength_det;
   std::vector<float> opPhoton_time_det;

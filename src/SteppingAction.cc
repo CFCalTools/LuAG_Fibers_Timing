@@ -2,6 +2,7 @@
 
 #include "MyMaterials.hh"
 #include "CreateTree.hh"
+#include "TrackInformation.hh"
 
 #include <iostream>
 #include <fstream>
@@ -67,6 +68,7 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
   {
     G4Track* theTrack = theStep->GetTrack();
     G4ParticleDefinition* particleType = theTrack->GetDefinition();
+    TrackInformation* theInfo = (TrackInformation*)( theStep->GetTrack()->GetUserInformation() );    
     
     
     // ------------------------------------------------------------------------- //
@@ -99,12 +101,23 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
         else                                      CreateTree::Instance()->opPhoton_process.push_back( -1 );
         
         CreateTree::Instance()->opPhoton_n++;
+        CreateTree::Instance()->opPhoton_parentTrackID.push_back( theInfo->GetOriginalTrackID() );
         CreateTree::Instance()->opPhoton_energy.push_back( theTrack->GetTotalEnergy()/eV );
         CreateTree::Instance()->opPhoton_waveLength.push_back( MyMaterials::fromEvToNm(theTrack->GetTotalEnergy()/eV) );
         CreateTree::Instance()->opPhoton_time.push_back( thePrePoint->GetGlobalTime()/picosecond );
         CreateTree::Instance()->opPhoton_vertexX.push_back( thePrePoint->GetPosition().x()/cm );
         CreateTree::Instance()->opPhoton_vertexY.push_back( thePrePoint->GetPosition().y()/cm );
-        CreateTree::Instance()->opPhoton_vertexZ.push_back( thePrePoint->GetPosition().z()/cm );          
+        CreateTree::Instance()->opPhoton_vertexZ.push_back( thePrePoint->GetPosition().z()/cm );
+        
+        if( fabs(thePrePoint->GetPosition().z()/cm) > 0.05 )
+        {
+          G4cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAh" << G4endl;
+          G4cout << "trackId: " << theTrack->GetTrackID() << "   vertex: ("
+                 << thePrePoint->GetPosition().x()/cm << ","
+                 << thePrePoint->GetPosition().y()/cm << ","
+                 << thePrePoint->GetPosition().z()/cm << ")"
+                 << G4endl;
+        }
       }
       
       
@@ -126,6 +139,7 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
             else                                      CreateTree::Instance()->opAbsPhoton_process.push_back( -1 );
           }
           
+          CreateTree::Instance()->opAbsPhoton_parentTrackID.push_back( theInfo->GetOriginalTrackID() );          
           CreateTree::Instance()->opAbsPhoton_energy.push_back( theTrack->GetTotalEnergy()/eV );
           CreateTree::Instance()->opAbsPhoton_waveLength.push_back( MyMaterials::fromEvToNm(theTrack->GetTotalEnergy()/eV) );
           CreateTree::Instance()->opAbsPhoton_time.push_back( theTrack->GetGlobalTime()/picosecond );
@@ -144,7 +158,7 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
             ( (thePrePV->GetName() == "gap_layer_rear")  && (thePostPV->GetName() == "gap_rear" ) ) )
         {
           if     ( thePostPV->GetName() == "gap_front" ) CreateTree::Instance()->opPhoton_side_gap.push_back( +1 );
-  		    else if( thePostPV->GetName() == "gap_rear"  ) CreateTree::Instance()->opPhoton_side_gap.push_back( -1 );
+          else if( thePostPV->GetName() == "gap_rear"  ) CreateTree::Instance()->opPhoton_side_gap.push_back( -1 );
                     
           if( theTrack->GetCreatorProcess() )
           {
@@ -155,6 +169,7 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
           }
           
           CreateTree::Instance()->opPhoton_n_gap++;
+          CreateTree::Instance()->opPhoton_parentTrackID_gap.push_back( theInfo->GetOriginalTrackID() );
           CreateTree::Instance()->opPhoton_energy_gap.push_back( theTrack->GetTotalEnergy()/eV );
           CreateTree::Instance()->opPhoton_waveLength_gap.push_back( MyMaterials::fromEvToNm(theTrack->GetTotalEnergy()/eV) );
           CreateTree::Instance()->opPhoton_time_gap.push_back( theTrack->GetGlobalTime()/picosecond );
@@ -176,6 +191,7 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
           }
           
           CreateTree::Instance()->opPhoton_n_win++;
+          CreateTree::Instance()->opPhoton_parentTrackID_win.push_back( theInfo->GetOriginalTrackID() );
           CreateTree::Instance()->opPhoton_energy_win.push_back( theTrack->GetTotalEnergy()/eV );
           CreateTree::Instance()->opPhoton_waveLength_win.push_back( MyMaterials::fromEvToNm(theTrack->GetTotalEnergy()/eV) );
           CreateTree::Instance()->opPhoton_time_win.push_back( theTrack->GetGlobalTime()/picosecond );
@@ -197,6 +213,7 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
           }
           
           CreateTree::Instance()->opPhoton_n_det++;
+          CreateTree::Instance()->opPhoton_parentTrackID_det.push_back( theInfo->GetOriginalTrackID() );
           CreateTree::Instance()->opPhoton_energy_det.push_back( theTrack->GetTotalEnergy()/eV );
           CreateTree::Instance()->opPhoton_waveLength_det.push_back( MyMaterials::fromEvToNm(theTrack->GetTotalEnergy()/eV) );
           CreateTree::Instance()->opPhoton_time_det.push_back( theTrack->GetGlobalTime()/picosecond );

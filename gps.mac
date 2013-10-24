@@ -1,7 +1,3 @@
-#
-# Remember that air source is on the negative side of z!
-#
-
 # choose ref physics list
 /Rise_Bench/phys/addPhysics  emlivermore
 
@@ -10,6 +6,7 @@
 
 # set verbose physics for the run
 #/Rise_Bench/phys/verbose 1
+#/tracking/verbose 1
 
 # set max number of Cerenkov photons per step
 #/Rise_Bench/phys/cerenkovMaxPhotons 10000
@@ -19,16 +16,8 @@
 
 
 /run/initialize
-#
-#/gps/energy 4 GeV
-#/gps/particle e-
-#/gps/position 0 60 0 mm
-#/gps/ang/type iso
-#/gps/ang/mintheta 1.560796
-#/gps/ang/maxtheta 1.580796
-#/gps/ang/minphi 1.570796
-#/gps/ang/maxphi 1.570796
-#
-##/tracking/verbose 1
+
+/gun/position 0 0.3 0 cm
+/gun/direction 0 -1 0
 
 /run/beamOn 100000
