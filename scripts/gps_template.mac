@@ -1,0 +1,23 @@
+# choose ref physics list
+/Rise_Bench/phys/addPhysics  emlivermore
+
+# set cuts for particles
+#/Rise_Bench/phys/setCuts 1.0
+
+# set verbose physics for the run
+#/Rise_Bench/phys/verbose 1
+#/tracking/verbose 1
+
+# set max number of Cerenkov photons per step
+#/Rise_Bench/phys/cerenkovMaxPhotons 10000
+
+# set max number of beta change for Cerenkov
+#/Rise_Bench/phys/SetMaxBetaChangePerStep 10.0
+
+
+/run/initialize
+
+/gun/position X0 Y0 Z0 cm
+/gun/direction PX0 PY0 PZ0
+
+/run/beamOn NEVTS
